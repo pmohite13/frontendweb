@@ -1,0 +1,60 @@
+table {
+  width: 100%;
+}
+
+mat-card-content {
+  width: 100%;
+}
+
+.mat-card-content,
+.mat-card-header .mat-card-title,
+.mat-card-subtitle {
+  font-size: 20px;
+}
+
+@media only screen and (max-width: 720px) and (orientation: portrait) {
+  mat-header-row,
+  mat-row {
+    width: 200%;
+  }
+}
+
+@media (max-width: 400px) {
+  mat-card-content {
+    width: 100%;
+    position: relative;
+  }
+
+  table {
+    width: 100%;
+    overflow: scroll;
+    display: block;
+  }
+}
+
+th.mat-header-cell {
+  text-align: left;
+  color: #3f51b5;
+  font-size: 14px;
+}
+
+.mat-table-action-column {
+  font-size: 20px;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.example-loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 56px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

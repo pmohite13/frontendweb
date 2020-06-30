@@ -1,0 +1,33 @@
+mat-card-content {
+  width: 100%;
+}
+mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-card-content,
+.mat-card-header .mat-card-title,
+.mat-card-subtitle {
+  font-size: 20px;
+}
+
+th.mat-header-cell {
+  text-align: left;
+  color: #3f51b5;
+  font-size: 14px;
+}
+
+.mat-table-action-column {
+  font-size: 20px;
+}
+
+.mat-row,
+.mat-header-row {
+  min-width: 2800px;
+  width: 100%;
+}
+
+table {
+  width: 100%;
+}

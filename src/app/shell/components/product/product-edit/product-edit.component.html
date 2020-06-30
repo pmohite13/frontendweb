@@ -1,0 +1,114 @@
+<div *ngIf="showLoading">
+    <mat-spinner></mat-spinner>
+</div>
+<mat-card *ngIf="!showLoading">
+
+    <mat-card-header class="mb20 gridheader">
+        <mat-card-title><strong>{{title}}</strong></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+
+        <form [formGroup]="productFormGroup">
+
+            <div class="row mt20">
+
+                <mat-form-field appearance="standard">
+                    <mat-label>Product Name</mat-label>
+                    <input matInput [formControl]="productFormGroup.controls.prodName">
+                    <mat-error *ngIf="productFormGroup.controls.prodName.hasError('required')">
+                        Product Name is <strong>required</strong>
+                    </mat-error>
+                    <mat-error *ngIf="productFormGroup.controls.prodName.hasError('minlength')">
+                        Min length is <strong>3</strong>
+                    </mat-error>
+                    <mat-error *ngIf="productFormGroup.controls.prodName.hasError('maxlength')">
+                        Max length is <strong>250</strong>
+                    </mat-error>
+                </mat-form-field><br>
+
+                <mat-form-field>
+                    <textarea matInput [formControl]="productFormGroup.controls.prodDescription"
+                        placeholder="Description"></textarea>
+                </mat-form-field><br>
+
+                <mat-form-field>
+                    <mat-select [disabled]='true' placeholder="Product Category*"
+                        [formControl]="productFormGroup.controls.prodCat">
+                        <mat-option *ngFor="let prodCat of productCategories" [value]="prodCat">
+                            {{prodCat.categoryName}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="productFormGroup.controls.prodCat.hasError('required')">
+                        Please choose your product category
+                    </mat-error>
+                </mat-form-field>
+
+            </div>
+
+
+            <div class="example-container mat-elevation-z8 mt20">
+                <table mat-table [dataSource]="dataSource" formArrayName="productAttribute" matSort>
+
+                    <!-- Attribute Name Column -->
+                    <ng-container matColumnDef="attributeId">
+                        <th [style.display]="'none'" mat-header-cell *matHeaderCellDef mat-sort-header> Attribute Id
+                        </th>
+                        <td [style.display]="'none'" mat-cell *matCellDef="let po;let i = index;">
+                            {{po.controls.attributeId.value}} </td>
+                    </ng-container>
+
+                    <!-- Attribute Name Column -->
+                    <ng-container matColumnDef="attributeName">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Attribute Name </th>
+                        <td mat-cell *matCellDef="let po;let i = index;"> {{po.controls.attributeName.value}} </td>
+                    </ng-container>
+
+                    <!--Attribute Value Column -->
+                    <ng-container matColumnDef="attributeValue">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Value </th>
+                        <td mat-cell *matCellDef="let po;let i = index;">
+                            <mat-form-field>
+                                <input matInput [formControl]="po.controls.attributeValue">
+                            </mat-form-field>
+                        </td>
+                    </ng-container>
+
+                    <!-- Action Column -->
+                    <ng-container matColumnDef="displayLink">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+                        <td mat-cell *matCellDef="let po">
+                            <a style="cursor: pointer;">
+                                <i class="material-icons">
+                                    edit
+                                </i>
+                            </a>
+
+                        </td>
+                    </ng-container>
+
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index;"></tr>
+                </table>
+            </div>
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+
+            <div class="row mt50" style="text-align: center;">
+
+                <span class="text-center col-md-6">
+                    <button mat-raised-button (click)="submit()" [disabled]="!productFormGroup.valid">Update</button>
+                </span>&nbsp;&nbsp;
+
+                <span class="text-center col-md-6">
+                    <button mat-raised-button color='primary' (click)="gotoHome()">Cancel</button>
+                </span>
+
+
+            </div>
+
+
+        </form>
+    </mat-card-content>
+
+</mat-card>
